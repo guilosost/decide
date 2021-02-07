@@ -167,7 +167,17 @@ DEFAULT_VERSION = 'v1'
 
 BASEURL="https://guilosost-decide.herokuapp.com"
 
-APIS = {}
+APIS = {
+    'authentication': BASEURL,
+    'base': BASEURL,
+    'booth': BASEURL,
+    'census': BASEURL,
+    'mixnet': BASEURL,
+    'postproc': BASEURL,
+    'store': BASEURL,
+    'visualizer': BASEURL,
+    'voting': BASEURL,
+}
 
 try:
     from local_settings import *

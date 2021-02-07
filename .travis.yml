@@ -1,24 +1,25 @@
 dist: xenial
-
 services:
-  - postgresql
+- postgresql
 addons:
-  postgresql: "9.4"
+  postgresql: '9.4'
 before_script:
-  - psql -U postgres -c "create user decide password 'decide'"
-  - psql -U postgres -c "create database test_decide owner decide"
-  - psql -U postgres -c "ALTER USER decide CREATEDB"
+- psql -U postgres -c "create user decide password 'decide'"
+- psql -U postgres -c "create database test_decide owner decide"
+- psql -U postgres -c "ALTER USER decide CREATEDB"
 language: python
 python:
-  - "3.6"
+- '3.6'
 install:
-  - pip install -r requirements.txt
-  - cd decide
-  - cp travis_local_settings.py local_settings.py
-  - coverage run --branch --source=. ./manage.py test mixnet --keepdb
-  - coverage xml
+- pip install -r requirements.txt
+- cd decide
+- cp travis_local_settings.py local_settings.py
+- coverage run --branch --source=. ./manage.py test mixnet --keepdb
+- coverage xml
 deploy:
   provider: heroku
   app: guilosost-decide
   strategy: git
-  apikey: $HEROKU_AUTH_TOKEN
+  apikey: "$HEROKU_AUTH_TOKEN"
+  api_key:
+    secure: ySNpCRcg5nRJh+rTRgf+iFwZvmRfKlf7Ze66eyaSZnMJsFbrQoPsh1WFy/76fiz7doIWCqUXhyq36W3qwRHOEVVfM+IcUSLqG2VYEeh/iITkcnOBHTAbaJEB7HMlCFELcQ5Gpuob+Ga1HpBKriiwFCPbjumNta+tQ6lIVR848Qaznue/CIvLWyVAGydV2KV8Nj+naXdmd7Ar/82hSbZ3qFptpTKqWUW61YodGDwlcXd+xo1dpZRotarthtBswFM1Xesx375h3A10z5EEZ6D9TY+uyCYDGjNfC1JYeDLHAPESJwkR0WAZLC/8U2cw/7FsJxZW44iNCmFnWHAnyNJr/y05q0L/CYPoQDL3glehCTR6yviZL+0USuqpN3HxW/6dVgfWtSzVeNYWhqAL3gTMTfXWRhLgBUjAzOChUcfhFIbqYXzMQ9hHb5Ua7HK9t92kUvQ6z7R29oBVNS01b/E9r7LRDZcPADhJ0AZSRHabbi3yirQByqBAYHZO+ATjUeFwpRKR9i2nNdhKX6QfcW1Pir+iZbHHhJGrM0wWdLoxlw69r37vutUdGbK1a9UZVvLQsHUSOSU4HgBTgZD1Ac9fWyMqDEoHze62Qenl+U90PpFdlnYO3AJcdxikSyYswEEsXavpD4HV5nD3UaREJQYnzM/JT8LSvy32Qx22w73Yhl0=
